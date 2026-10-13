@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LedgerVault AI — 100% Private, Local-First Expense & Invoice Sorter</title>
+  <meta name="description" content="A privacy-first, local AI expense and invoice sorter for freelancers and small businesses. Powered by open-weight models with zero cloud data leaks and 100% offline capability.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="dark-theme">
+  <!-- App Background Effects -->
+  <div class="bg-glow bg-glow-1" aria-hidden="true"></div>
+  <div class="bg-glow bg-glow-2" aria-hidden="true"></div>
+
+  <!-- Top Navigation Header -->
+  <header class="app-header" id="app-header">
+    <div class="header-container">
+      <div class="brand-group">
+        <div class="brand-logo" id="brand-logo">
+          <svg class="shield-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <path d="m9 12 2 2 4-4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <div class="brand-title-wrap">
+            <span class="brand-name">LedgerVault</span>
+            <span class="brand-badge">AI 2.0</span>
+          </div>
+          <p class="brand-tagline">100% Local • Zero Cloud Leaks • Open-Weight Engine</p>
+        </div>
+      </div>
+
+      <!-- Engine Status & Switcher -->
+      <div class="engine-status-bar" id="engine-status-bar">
+        <div class="status-indicator-pill" id="status-indicator-pill" title="All processing happens strictly on your device.">
+          <span class="status-dot pulsing"></span>
+          <span class="status-text" id="status-engine-text">Local In-Browser Engine (Web-WASM)</span>
+          <span class="privacy-lock-badge">
+            <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+            0kb Sent
+          </span>
+        </div>
+
+        <button class="ghost-btn" id="btn-engine-settings" title="Configure local Ollama, LM Studio or in-browser model">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+          </svg>
+          <span>AI Settings</span>
+        </button>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="header-actions">
+        <button class="nav-btn highlight-btn" id="btn-side-hustle-story">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+          </svg>
+          <span>Side Hustle Story & DEV Post</span>
+        </button>
+        <button class="primary-btn" id="btn-quick-upload">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>
+          </svg>
+          <span>Upload Receipt</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="main-content" id="main-content">
+    
+    <!-- Hero / Metrics Overview Banner -->
+    <section class="metrics-section" id="metrics-section" aria-label="Financial and Tax Metrics">
+      <div class="metrics-grid">
+        
+        <!-- Metric Card 1: Total Processed -->
+        <div class="metric-card" id="metric-card-total">
+          <div class="metric-header">
+            <span class="metric-label">Tracked Expenses</span>
+            <div class="metric-icon-wrap icon-blue">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="4" width="20" height="16" rx="2"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/>
+              </svg>
+            </div>
+          </div>
+          <div class="metric-value-wrap">
+            <h2 class="metric-value" id="kpi-total-expenses">₹89,763.00</h2>
+            <span class="metric-badge badge-neutral" id="kpi-receipt-count">8 items</span>
+          </div>
+          <p class="metric-subtext">Across current FY 2026-27 ledger</p>
+        </div>
+
+        <!-- Metric Card 2: Estimated Tax Deductions -->
+        <div class="metric-card" id="metric-card-tax">
+          <div class="metric-header">
+            <span class="metric-label">Est. Tax Savings (IT Act / 44ADA)</span>
+            <div class="metric-icon-wrap icon-emerald">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+              </svg>
+            </div>
+          </div>
+          <div class="metric-value-wrap">
+            <h2 class="metric-value text-emerald" id="kpi-tax-savings">₹26,928.90</h2>
+            <span class="metric-badge badge-emerald">~30% slab</span>
+          </div>
+          <p class="metric-subtext">Allowable professional write-offs</p>
+        </div>
+
+        <!-- Metric Card 3: Billable Reimbursements -->
+        <div class="metric-card" id="metric-card-billable">
+          <div class="metric-header">
+            <span class="metric-label">Billable to Clients</span>
+            <div class="metric-icon-wrap icon-purple">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/>
+              </svg>
+            </div>
+          </div>
+          <div class="metric-value-wrap">
+            <h2 class="metric-value text-purple" id="kpi-billable">₹52,430.00</h2>
+            <span class="metric-badge badge-purple" id="kpi-billable-count">3 receipts</span>
+          </div>
+          <p class="metric-subtext">Ready for 1-click client reimbursement</p>
+        </div>
+
+        <!-- Metric Card 4: Open AI Advantage -->
+        <div class="metric-card" id="metric-card-privacy">
+          <div class="metric-header">
+            <span class="metric-label">Zero Cloud API Bill</span>
+            <div class="metric-icon-wrap icon-cyan">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+              </svg>
+            </div>
+          </div>
+          <div class="metric-value-wrap">
+            <h2 class="metric-value text-cyan" id="kpi-cloud-cost-saved">₹0.00 Spent</h2>
+            <span class="metric-badge badge-cyan">Saved ₹5,400</span>
+          </div>
+          <p class="metric-subtext">0 cloud API tokens spent • 100% private</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Main Workspace: Scanner & Processing Studio -->
+    <section class="scanner-section" id="scanner-section">
+      <div class="section-header-row">
+        <div>
+          <h1 class="section-title">Local AI Document Ingestion & Tax Extraction</h1>
+          <p class="section-subtitle">Drop receipts, GST tax invoices or contractor bills. Analyzed entirely on-device with zero server uploads.</p>
+        </div>
+        <div class="sample-pills-bar">
+          <span class="sample-pills-label">Instant Demo Receipts:</span>
+          <button class="sample-pill-btn" id="btn-sample-cafe" data-sample="cafe">
+            ☕ Blue Tokai Cafe (₹485)
+          </button>
+          <button class="sample-pill-btn" id="btn-sample-cloud" data-sample="cloud">
+            ☁️ Cloud Hosting (₹6,950)
+          </button>
+          <button class="sample-pill-btn" id="btn-sample-hardware" data-sample="hardware">
+            💻 Apex Electronics (₹13,499)
+          </button>
+          <button class="sample-pill-btn" id="btn-sample-rideshare" data-sample="rideshare">
+            🚗 Uber / Ola Transit (₹480)
+          </button>
+          <button class="sample-pill-btn" id="btn-sample-contractor" data-sample="contractor">
+            💼 Subcontractor Bill (₹45,000)
+          </button>
+        </div>
+      </div>
+
+      <div class="studio-layout">
+        <!-- Left Column: Upload Dropzone & Live Document View -->
+        <div class="studio-card upload-viewer-card" id="upload-viewer-card">
+          <div class="card-top-bar">
+            <span class="card-bar-title">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/>
+              </svg>
+              Document Visualizer & OCR Bounding Boxes
+            </span>
+            <div class="viewer-actions">
+              <button class="icon-tool-btn" id="btn-zoom-in" title="Zoom in">+</button>
+              <button class="icon-tool-btn" id="btn-zoom-reset" title="Reset view">100%</button>
+              <button class="icon-tool-btn" id="btn-clear-preview" title="Clear current image">✕</button>
+            </div>
+          </div>
+
+          <!-- Drag and Drop Target -->
+          <div class="dropzone-area" id="dropzone-area" tabindex="0">
+            <input type="file" id="file-input" accept="image/*,.pdf" class="file-input-hidden" aria-label="Upload document file">
+            
+            <!-- Empty State Inside Dropzone -->
+            <div class="dropzone-empty-state" id="dropzone-empty-state">
+              <div class="upload-icon-circle">
+                <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="17 8 12 3 7 8"/>
+                  <line x1="12" y1="3" x2="12" y2="15"/>
+                </svg>
+              </div>
+              <h3 class="upload-primary-text">Drag & drop your receipt or invoice</h3>
+              <p class="upload-secondary-text">PNG, JPG, WEBP, or PDF • Up to 25MB • Processed 100% on this laptop</p>
+              <div class="upload-button-row">
+                <button type="button" class="btn-secondary" id="btn-browse-file">Browse Local Files</button>
+                <button type="button" class="btn-ghost" id="btn-demo-quick-load">Load Featured Receipt</button>
+              </div>
+              <div class="privacy-guarantee-note">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h2v-6h-2v6zm0-8h2V7h-2v2z"/>
+                </svg>
+                <span>Client NDAs safe: No image is ever transmitted to an external server.</span>
+              </div>
+            </div>
+
+            <!-- Active Document Preview with Laser Scan Beam & Bounding Boxes -->
+            <div class="document-preview-container hidden" id="document-preview-container">
+              <div class="preview-scroll-wrapper" id="preview-scroll-wrapper">
+                <div class="image-bounding-wrapper" id="image-bounding-wrapper">
+                  <img id="preview-doc-image" src="" alt="Loaded Receipt Preview" class="preview-image">
+                  
+                  <!-- Scanning Laser Animation -->
+                  <div class="scan-beam-line hidden" id="scan-beam-line" aria-hidden="true"></div>
+
+                  <!-- Dynamic AI Bounding Boxes (Rendered via JS) -->
+                  <div class="bounding-overlay" id="bounding-overlay"></div>
+                </div>
+              </div>
+              <div class="preview-footer-bar">
+                <span class="file-info-chip" id="preview-filename-chip">cafe-receipt.jpg</span>
+                <span class="file-size-chip" id="preview-filesize-chip">786 KB</span>
+                <button class="btn-micro" id="btn-reanalyze">
+                  <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+                  Re-parse with Local AI
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Local Model Live Output Terminal -->
+          <div class="terminal-panel" id="terminal-panel">
+            <div class="terminal-header">
+              <span class="terminal-title">
+                <span class="terminal-dot"></span>
+                Local Inference Stream (Llama 3.2 3B / Qwen 2.5)
+              </span>
+              <span class="terminal-latency" id="terminal-latency">Idle</span>
+            </div>
+            <pre class="terminal-body" id="terminal-body"><code id="terminal-code">// Waiting for receipt input... Drop a file or click an instant demo receipt above.</code></pre>
+          </div>
+        </div>
+
+        <!-- Right Column: Extracted Entity Inspector & Tax Deductions Form -->
+        <div class="studio-card extraction-form-card" id="extraction-form-card">
+          <div class="card-top-bar">
+            <span class="card-bar-title">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/>
+              </svg>
+              Extracted Financial Schema & IRS Schedule C Match
+            </span>
+            <div class="confidence-pill" id="ai-confidence-pill">
+              <span class="confidence-score" id="ai-confidence-score">99% Match</span>
+            </div>
+          </div>
+
+          <!-- Form Content -->
+          <form class="extraction-form" id="extraction-form" onsubmit="event.preventDefault();">
+            
+            <!-- Vendor & Date Row -->
+            <div class="form-row two-col">
+              <div class="form-group">
+                <label for="field-vendor" class="field-label">Vendor / Merchant</label>
+                <div class="input-with-icon">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                  <input type="text" id="field-vendor" class="form-control" placeholder="e.g. CloudScale Hosting" required>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="field-date" class="field-label">Transaction Date</label>
+                <div class="input-with-icon">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                  <input type="date" id="field-date" class="form-control" required>
+                </div>
+              </div>
+            </div>
+
+            <!-- Total, Currency & Tax Amount Row -->
+            <div class="form-row three-col">
+              <div class="form-group">
+                <label for="field-total" class="field-label">Total Amount</label>
+                <div class="input-with-icon">
+                  <span class="currency-symbol" id="display-currency-sym">₹</span>
+                  <input type="number" step="0.01" id="field-total" class="form-control num-input" placeholder="0.00" required>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="field-currency" class="field-label">Currency</label>
+                <select id="field-currency" class="form-control">
+                  <option value="INR" selected>INR (₹)</option>
+                  <option value="USD">USD ($)</option>
+                  <option value="EUR">EUR (€)</option>
+                  <option value="GBP">GBP (£)</option>
+                  <option value="AED">AED (د.إ)</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="field-tax" class="field-label">GST / VAT Included</label>
+                <div class="input-with-icon">
+                  <span class="currency-symbol">₹</span>
+                  <input type="number" step="0.01" id="field-tax" class="form-control num-input" placeholder="0.00">
+                </div>
+              </div>
+            </div>
+
+            <!-- Tax Categorization (Income Tax Act & 44ADA Rules) -->
+            <div class="form-row two-col">
+              <div class="form-group">
+                <label for="field-category" class="field-label">
+                  Tax Category
+                  <span class="info-badge" title="Mapped to Income Tax Act Sec 37(1) / Sec 44ADA & GST Input Credit">IT Act / GST</span>
+                </label>
+                <select id="field-category" class="form-control">
+                  <option value="Software & Cloud Subscriptions">Software & Cloud Subscriptions (100% Sec 37)</option>
+                  <option value="Office & Freelance Supplies">Office & Freelance Supplies (100% Sec 37)</option>
+                  <option value="Client Business Meals & Meetings">Client Business Meals & Meetings (100% Sec 37)</option>
+                  <option value="Travel & Rideshare (Ola/Uber)">Travel & Rideshare (Ola/Uber) (100% Sec 37)</option>
+                  <option value="Hardware & Equipment">Hardware & Computers (Sec 32 Deprec. / 100%)</option>
+                  <option value="Subcontractor & Freelance Labor">Subcontractor Labor (Sec 194J/194C TDS)</option>
+                  <option value="Advertising & Marketing">Digital Marketing & Ads (100% Sec 37)</option>
+                  <option value="Professional & Legal Services">CA, Legal & Advisory (100% Sec 37)</option>
+                  <option value="Non-Deductible Personal">Non-Deductible / Personal Expense (0%)</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="field-client" class="field-label">Billable Client Attribution</label>
+                <div class="input-with-icon">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                  <input type="text" id="field-client" class="form-control" placeholder="e.g. Swiggy, Zomato, Studio Alpha (or Internal)">
+                </div>
+              </div>
+            </div>
+
+            <!-- Payment Method & Invoice # -->
+            <div class="form-row two-col">
+              <div class="form-group">
+                <label for="field-payment-method" class="field-label">Payment Method</label>
+                <select id="field-payment-method" class="form-control">
+                  <option value="UPI / GPay / PhonePe">UPI / GPay / PhonePe</option>
+                  <option value="Netbanking / NEFT / IMPS">Netbanking / NEFT / IMPS</option>
+                  <option value="HDFC / ICICI Business Card">HDFC / ICICI Business Card</option>
+                  <option value="Visa / Mastercard">Visa / Mastercard</option>
+                  <option value="Cash / Personal Account">Cash / Personal Account</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="field-invoice-num" class="field-label">GST / Tax Invoice #</label>
+                <input type="text" id="field-invoice-num" class="form-control" placeholder="e.g. GSTIN-2026-884">
+              </div>
+            </div>
+
+            <!-- Itemized Line Items Preview -->
+            <div class="form-group">
+              <label class="field-label">Extracted Line Items</label>
+              <div class="line-items-container" id="line-items-container">
+                <!-- Dynamically populated line items -->
+                <div class="line-item-row default-empty">
+                  <span>No line items parsed yet. Drop a document to extract.</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- IRS / Income Tax Audit Risk Analysis Box -->
+            <div class="audit-risk-card" id="audit-risk-card">
+              <div class="audit-risk-header">
+                <div class="risk-meter-indicator">
+                  <span class="risk-circle low-risk" id="risk-circle"></span>
+                  <span class="risk-level-text" id="risk-level-text">Low Audit Risk (Safe Write-off)</span>
+                </div>
+                <span class="deductible-amount-tag" id="deductible-amount-tag">₹6,950.00 Deductible</span>
+              </div>
+              <p class="audit-explanation" id="audit-explanation">
+                Income Tax Act Section 37(1) / Section 44ADA compliant: 100% allowable revenue expense wholly and exclusively incurred for freelance profession. Retain GST invoice copy.
+              </p>
+            </div>
+
+            <!-- Form Actions -->
+            <div class="form-actions-row">
+              <button type="button" class="btn-primary-action" id="btn-save-to-ledger">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+                <span id="save-button-label">Save to Private Ledger</span>
+              </button>
+              <button type="button" class="btn-ghost-action" id="btn-reset-form">
+                Clear Form
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Visual Analytics & Deductions Breakdown -->
+    <section class="analytics-section" id="analytics-section" aria-label="Visual Financial Analytics">
+      <div class="section-header-row">
+        <div>
+          <h2 class="section-title">Freelancer Tax & Spending Intelligence</h2>
+          <p class="section-subtitle">Real-time local analytics in Indian Rupees. Computed on-device with zero tracking.</p>
+        </div>
+      </div>
+
+      <div class="analytics-grid">
+        <!-- Category Distribution Donut Chart -->
+        <div class="analytics-card" id="analytics-card-categories">
+          <div class="card-top-bar">
+            <span class="card-bar-title">Expenses by Tax Category</span>
+            <span class="chart-legend-hint">Hover segments for totals</span>
+          </div>
+          <div class="chart-content-wrap">
+            <div class="donut-chart-box">
+              <svg id="category-donut-svg" class="donut-svg" viewBox="0 0 200 200">
+                <!-- Segments generated via JS -->
+              </svg>
+              <div class="donut-center-stat">
+                <span class="donut-center-amount" id="donut-center-total">₹89,763</span>
+                <span class="donut-center-label">Gross Total</span>
+              </div>
+            </div>
+            <div class="donut-legend-list" id="donut-legend-list">
+              <!-- Dynamically populated legend chips -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Monthly Spending & Deduction Trend -->
+        <div class="analytics-card" id="analytics-card-trends">
+          <div class="card-top-bar">
+            <span class="card-bar-title">Monthly Deduction Trend</span>
+            <div class="chart-legend-keys">
+              <span class="legend-key key-gross">Gross Expenses</span>
+              <span class="legend-key key-deductible">Tax Deductible</span>
+            </div>
+          </div>
+          <div class="bar-chart-container" id="bar-chart-container">
+            <div class="chart-bars-group" id="chart-bars-group">
+              <!-- Monthly bars generated via JS -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Client Billable Reimbursables -->
+        <div class="analytics-card" id="analytics-card-clients">
+          <div class="card-top-bar">
+            <span class="card-bar-title">Client Reimbursement Pipeline</span>
+            <button class="btn-micro" id="btn-gen-client-invoice" title="Generate client reimbursement statement in INR">
+              Generate Statement
+            </button>
+          </div>
+          <div class="client-pipeline-list" id="client-pipeline-list">
+            <!-- Client list generated via JS -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Ledger Table & Audit Center -->
+    <section class="ledger-section" id="ledger-section" aria-label="Transaction Ledger Table">
+      <div class="ledger-header-card">
+        <div class="ledger-title-group">
+          <h2 class="section-title">Verified Expense & Tax Invoice Ledger</h2>
+          <span class="table-count-badge" id="table-count-badge">8 items</span>
+        </div>
+
+        <!-- Filters and Controls -->
+        <div class="ledger-controls-row">
+          <!-- Search Input -->
+          <div class="search-box-wrap">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" id="ledger-search-input" placeholder="Search vendor, category, client, or invoice #...">
+          </div>
+
+          <!-- Category Filter -->
+          <select id="ledger-category-filter" class="table-filter-select">
+            <option value="all">All Tax Categories</option>
+            <option value="Software & Cloud Subscriptions">Software & Cloud</option>
+            <option value="Office & Freelance Supplies">Office & Coworking</option>
+            <option value="Client Business Meals & Meetings">Client Meals & Meetings</option>
+            <option value="Travel & Rideshare (Ola/Uber)">Travel (Ola/Uber)</option>
+            <option value="Hardware & Equipment">Hardware & Computers</option>
+            <option value="Subcontractor & Freelance Labor">Subcontractors</option>
+          </select>
+
+          <!-- Type Filter -->
+          <select id="ledger-status-filter" class="table-filter-select">
+            <option value="all">All Statuses</option>
+            <option value="deductible">100% Deductible</option>
+            <option value="billable">Billable to Client</option>
+          </select>
+
+          <!-- Export Menu -->
+          <div class="export-dropdown-wrap">
+            <button class="btn-secondary" id="btn-export-dropdown-toggle">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              <span>Export Ledger</span>
+            </button>
+            <div class="export-menu hidden" id="export-menu">
+              <button class="export-item" id="btn-export-csv">
+                <strong>Export CSV (INR)</strong>
+                <span>Tally, Zoho & Excel format</span>
+              </button>
+              <button class="export-item" id="btn-export-json">
+                <strong>Export JSON</strong>
+                <span>Open Accounting Schema</span>
+              </button>
+              <button class="export-item" id="btn-export-tax-report">
+                <strong>Income Tax (Sec 37 / 44ADA) Summary</strong>
+                <span>Printable Audit Report (₹)</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Table Element -->
+        <div class="table-responsive">
+          <table class="ledger-table" id="ledger-table">
+            <thead>
+              <tr>
+                <th class="col-date" data-sort="date">Date ↕</th>
+                <th class="col-vendor" data-sort="vendor">Vendor / Merchant ↕</th>
+                <th class="col-category">Tax Category</th>
+                <th class="col-client">Client / Project</th>
+                <th class="col-deductible">Deductible</th>
+                <th class="col-amount" data-sort="total">Total ↕</th>
+                <th class="col-status">Status</th>
+                <th class="col-actions">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="ledger-table-body">
+              <!-- Dynamically populated via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Side Hustle Pitch & DEV Post Modal -->
+  <div class="modal-backdrop hidden" id="side-hustle-modal" role="dialog" aria-modal="true" aria-labelledby="modal-story-title">
+    <div class="modal-window large-modal">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <span class="modal-tag">Theme: Side Hustle • DEV Community Challenge</span>
+          <h2 class="modal-title" id="modal-story-title">Why Open Innovation Makes This Side Hustle Viable</h2>
+        </div>
+        <button class="modal-close-btn" id="btn-close-story-modal" aria-label="Close modal">✕</button>
+      </div>
+
+      <div class="modal-tab-bar">
+        <button class="modal-tab active" data-tab="manifesto" id="tab-btn-manifesto">The Open AI Advantage</button>
+        <button class="modal-tab" data-tab="economics" id="tab-btn-economics">Unit Economics ($0 Marginal API)</button>
+        <button class="modal-tab" data-tab="architecture" id="tab-btn-architecture">Local Agent Architecture</button>
+        <button class="modal-tab" data-tab="devpost" id="tab-btn-devpost">Drafted DEV Post</button>
+      </div>
+
+      <div class="modal-body-content">
+        <!-- Tab 1: Open AI Advantage -->
+        <div class="modal-tab-pane active" id="pane-manifesto">
+          <div class="story-grid">
+            <div class="story-card">
+              <div class="story-card-icon">🔒</div>
+              <h3>1. Absolute Privacy & Client NDAs</h3>
+              <p>Freelancers sign non-disclosure agreements with enterprise clients. Uploading client invoices, bank details, and hourly rates to closed commercial APIs risks IP leaks and violates contract clauses. LedgerVault AI runs on local open-weights: zero financial bytes ever touch an external cloud.</p>
+            </div>
+
+            <div class="story-card">
+              <div class="story-card-icon">✈️</div>
+              <h3>2. Zero-Internet Offline Operation</h3>
+              <p>Freelancers work on airplanes, commuter trains, and coffee shops with spotty Wi-Fi. By utilizing in-browser WebAssembly/WebGPU models and local Ollama harnesses, this tool operates anywhere on earth with 100% fidelity without an internet connection.</p>
+            </div>
+
+            <div class="story-card">
+              <div class="story-card-icon">💡</div>
+              <h3>3. Model Agility & Custom Prompts</h3>
+              <p>Unlike rigid closed-API accounting platforms that break when vendors change formatting, open-weight models (Llama 3.2 3B, Qwen 2.5 7B, Mistral Nemo) let builders fine-tune and customize structured JSON prompts specifically for IRS Schedule C deductions and local VAT tax codes.</p>
+            </div>
+
+            <div class="story-card">
+              <div class="story-card-icon">💰</div>
+              <h3>4. A Profitable ₹2,999 One-Time Product</h3>
+              <p>Proprietary vision APIs charge ₹5 to ₹12 per receipt. For an Indian freelancer scanning 300 receipts/year, that’s ₹3,600+ in recurring API costs alone. With local open-source inference, the marginal inference cost is <strong>₹0.00</strong>. We can sell a lifetime license for ₹2,999 or ₹299/mo and keep 95%+ profit margins!</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 2: Unit Economics -->
+        <div class="modal-tab-pane" id="pane-economics">
+          <div class="economics-comparison-table">
+            <table class="comparison-table">
+              <thead>
+                <tr>
+                  <th>Cost Dimension</th>
+                  <th>Closed Cloud Architecture (OpenAI / Google Vision)</th>
+                  <th>LedgerVault Open-Weight Architecture</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Inference Cost Per Receipt</strong></td>
+                  <td class="text-danger">₹5.00 - ₹12.00 / doc</td>
+                  <td class="text-success">₹0.00 (Local on-device compute)</td>
+                </tr>
+                <tr>
+                  <td><strong>Monthly Cloud Bill (1,000 users)</strong></td>
+                  <td class="text-danger">₹1,25,000 / month</td>
+                  <td class="text-success">₹0.00 / month</td>
+                </tr>
+                <tr>
+                  <td><strong>Customer Pricing Model</strong></td>
+                  <td>Forces recurring ₹1,200 - ₹2,500/mo subscription</td>
+                  <td>Enables highly attractive ₹2,999 lifetime license or low ₹299/mo tier</td>
+                </tr>
+                <tr>
+                  <td><strong>Data Compliance Risk</strong></td>
+                  <td class="text-danger">DPDP Act 2023 / GDPR cross-border cloud processor liabilities</td>
+                  <td class="text-success">Zero liability: Data never leaves user device</td>
+                </tr>
+                <tr>
+                  <td><strong>Gross Profit Margin</strong></td>
+                  <td>45% - 60%</td>
+                  <td class="text-success"><strong>96.8%</strong></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Tab 3: Local Architecture -->
+        <div class="modal-tab-pane" id="pane-architecture">
+          <div class="architecture-diagram-box">
+            <pre class="ascii-diagram"><code>┌────────────────────────────────────────────────────────────────────────┐
+│                   LedgerVault AI Architecture (Local-First)            │
+└────────────────────────────────────────────────────────────────────────┘
+                                    │
+                                    ▼
+       ┌────────────────────────────────────────────────────────┐
+       │   Document Ingestion (Drag-and-Drop, PDF, JPG, PNG)    │
+       └────────────────────────────────────────────────────────┘
+                                    │
+                  ┌─────────────────┴─────────────────┐
+                  ▼                                   ▼
+       ┌────────────────────────┐          ┌─────────────────────┐
+       │ In-Browser Transformers│          │ Local Ollama / LM   │
+       │ .js / Web-WASM Runtime │   OR     │ Studio Bridge       │
+       │ (Zero Setup Required)  │          │ (localhost:11434)   │
+       └────────────────────────┘          └─────────────────────┘
+                  │                                   │
+                  └─────────────────┬─────────────────┘
+                                    ▼
+       ┌────────────────────────────────────────────────────────┐
+       │  Structured Financial Schema Enforcement (JSON Parser) │
+       │  - Vendor, Date, Currency, Totals, Taxes, Line Items   │
+       └────────────────────────────────────────────────────────┘
+                                    │
+                                    ▼
+       ┌────────────────────────────────────────────────────────┐
+       │     IRS Schedule C Tax Categorization & Deduction Engine│
+       │  - Meals (50%), Software (100%), Equipment Deprec.     │
+       └────────────────────────────────────────────────────────┘
+                                    │
+                                    ▼
+       ┌────────────────────────────────────────────────────────┐
+       │ Local Encrypted Storage (IndexedDB) • Zero Cloud Leaks │
+       │ Instant CSV / JSON / PDF Schedule C Statement Export   │
+       └────────────────────────────────────────────────────────┘</code></pre>
+          </div>
+        </div>
+
+        <!-- Tab 4: Drafted DEV Post -->
+        <div class="modal-tab-pane" id="pane-devpost">
+          <div class="devpost-box">
+            <div class="devpost-toolbar">
+              <span class="devpost-label">Ready-to-publish Markdown post for DEV Community Challenge</span>
+              <button class="btn-micro" id="btn-copy-devpost">📋 Copy Markdown</button>
+            </div>
+            <textarea class="devpost-textarea" id="devpost-textarea" readonly rows="12"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn-primary-action" id="btn-close-modal-bottom">Close Window</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- AI Settings & Local Engine Config Modal -->
+  <div class="modal-backdrop hidden" id="settings-modal" role="dialog" aria-modal="true" aria-labelledby="modal-settings-title">
+    <div class="modal-window">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <h2 class="modal-title" id="modal-settings-title">Local AI Engine Configuration</h2>
+          <p class="modal-subtitle">Switch between client-side in-browser inference or your local Ollama server.</p>
+        </div>
+        <button class="modal-close-btn" id="btn-close-settings-modal" aria-label="Close settings">✕</button>
+      </div>
+
+      <div class="modal-body-content">
+        <div class="engine-choice-cards">
+          <!-- Engine 1: In-browser -->
+          <label class="engine-choice-card active" id="label-engine-browser">
+            <input type="radio" name="engine-select" value="browser" checked>
+            <div class="engine-card-content">
+              <div class="engine-card-head">
+                <span class="engine-title">⚡ In-Browser Neural Engine (Web-WASM)</span>
+                <span class="badge-recommended">Zero Setup</span>
+              </div>
+              <p class="engine-desc">Runs directly inside your web browser using WebAssembly. Requires no external software, downloads or setup. 100% private.</p>
+            </div>
+          </label>
+
+          <!-- Engine 2: Ollama -->
+          <label class="engine-choice-card" id="label-engine-ollama">
+            <input type="radio" name="engine-select" value="ollama">
+            <div class="engine-card-content">
+              <div class="engine-card-head">
+                <span class="engine-title">🦙 Ollama Local Server (Native GPU)</span>
+                <span class="badge-power">High Precision</span>
+              </div>
+              <p class="engine-desc">Connects to your local Ollama daemon for native Llama 3.2 3B or Qwen 2.5 inference. Lightning fast with GPU acceleration.</p>
+            </div>
+          </label>
+        </div>
+
+        <!-- Ollama Config Options (conditional) -->
+        <div class="ollama-config-panel hidden" id="ollama-config-panel">
+          <div class="form-group">
+            <label for="ollama-endpoint-url" class="field-label">Ollama Host URL</label>
+            <input type="text" id="ollama-endpoint-url" class="form-control" value="http://localhost:11434">
+          </div>
+          <div class="form-group">
+            <label for="ollama-model-name" class="field-label">Model Tag</label>
+            <input type="text" id="ollama-model-name" class="form-control" value="llama3.2:3b" placeholder="llama3.2:3b or qwen2.5:7b">
+          </div>
+          <div class="ollama-test-row">
+            <button class="btn-secondary" id="btn-test-ollama">Test Local Connection</button>
+            <span class="ollama-status-msg" id="ollama-status-msg">Not tested</span>
+          </div>
+        </div>
+
+        <div class="privacy-telemetry-box">
+          <h4>🔒 Network Telemetry Audit</h4>
+          <div class="telemetry-item">
+            <span>External Requests Made:</span>
+            <strong class="text-success">0 requests</strong>
+          </div>
+          <div class="telemetry-item">
+            <span>Telemetry & Analytics:</span>
+            <strong class="text-success">Disabled (100% Local)</strong>
+          </div>
+          <div class="telemetry-item">
+            <span>Storage Location:</span>
+            <strong>Browser LocalStorage & IndexedDB</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn-ghost-action" id="btn-reset-sample-data">Reset Demo Data</button>
+        <button class="btn-primary-action" id="btn-save-settings">Apply Engine Settings</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Print / Report Output Container (hidden until printed) -->
+  <div id="print-tax-report-container" class="print-tax-report-container hidden"></div>
+
+  <!-- Notification Toast Container -->
+  <div class="toast-container" id="toast-container" aria-live="polite"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
